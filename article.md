@@ -22,7 +22,7 @@ Common time series models (e.g., ARIMA, LSTM) don't have methods to team with mi
 The goal of imputation is to fill in missing values in a way that preserves the underlying patterns of the time series. But we have to be careful when using imputed data because the method we use for imputation necessarily introduces assumptions (read uncertainty) into the model.
 
 #### Common Imputation Techniques
-**Forward Fill** replaces missing values with the most recent available value. It assumes that the last observed value is a good approximation for the missing point.
+Forward Fill replaces missing values with the most recent available value. It assumes that the last observed value is a good approximation for the missing point.
 
 Python Example: Forward Fill
 
@@ -30,7 +30,7 @@ Python Example: Forward Fill
 
 Forward fill is simple and quick to implement. It preserves trends and does not introduce sudden changes. However, it can also propagate (meaning continue) outdated values if missing intervals are large. Forward will is not a good method for a time series with rapid changes between values.
 
-**Backward Fill** replaces missing values with the next observed value. It assumes future observations approximate the missing point.
+Backward Fill replaces missing values with the next observed value. It assumes future observations approximate the missing point.
 
 Python Example: Backward Fill
 
@@ -38,7 +38,7 @@ Python Example: Backward Fill
 
 Backfill is also simple to use and effective when the series quickly stabilizes. It can introduce "future leakage" if used improperly in predictive models and it assumes that the next observations is a reliable approximation for the previous value (basically the opposite of what we are trying to do with time series forecasting).
 
-**Mean Fill** replaces missing values with the mean of the available data.
+Mean Fill replaces missing values with the mean of the available data.
 
 Python Example: Mean Fill
 
@@ -46,7 +46,7 @@ Python Example: Mean Fill
 
 This is a hybrid between forward fill and back fill. It is also simple and fast to compute and works well for stationary series without strong trends. Because it uses the mean, it smooths out variations which makes it harder to identify temporal patterns. It also assumes data is stationary and the mean is stable.
 
-**Regression-Based Imputation** predicts missing values based on relationships with other variables or past observations. It is a more sophisticated method that can account for trends and patterns.
+Regression-Based Imputation predicts missing values based on relationships with other variables or past observations. It is a more sophisticated method that can account for trends and patterns.
 
 Python Example: Regression Imputation
 
@@ -59,9 +59,9 @@ While imputation solves the problem of missing data, it introduces assumptions t
 
 Example of Modeling Caution:
 
-- **Forward/Backward Fill** works well for short-term gaps but can fail for larger missing intervals.
-- **Mean Fill** ignores temporal structure, which may mislead models dependent on trends or seasonality.
-- **Regression Imputation** assumes that relationships remain stable over time, which may not always hold true.
+- Forward/Backward Fill works well for short-term gaps but can fail for larger missing intervals.
+- Mean Fill ignores temporal structure, which may mislead models dependent on trends or seasonality.
+- Regression Imputation assumes that relationships remain stable over time, which may not always hold true.
 
 There are best practices to mitigate the problems with imputating time series values. Always mark imputed values in a separate column to track where imputation occurred. Test models with and without imputed data to evaluate the impact of imputation. Consider models that handle missing values naturally, such as neural network models.
 
